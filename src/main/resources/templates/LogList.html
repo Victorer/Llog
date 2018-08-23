@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form action="/search" class="px-5 py-3" method="get" >
+    <div class="input-group">
+        <input name="keywords" type="text" class="form-control" placeholder="搜索" aria-label="搜索" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <input type="submit" value="搜索" class="btn btn-outline-secondary"/>
+        </div>
+    </div>
+</form>
+<div class="alert alert-light" role="alert">
+</div>
+<ul class="list-group">
+    <li th:each=" c: ${page}" class="list-group-item">
+        <div class="row">
+            <a >
+                <h4 scope="row"></h4>
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <h6 scope="row" th:text="${c.getContent()}" class="align-bottom" ></h6>
+        </div>
+        <!--
+            <td><a th:href="@{/users/update/{userId}(userId=${user.id})}" th:text="${user.name}"></a></td>
+        -->
+        <!--<div class="row">-->
+            <!--<span th:each="highlight : ${song.highlight}">-->
+                <!--<span th:each="word : ${highlight.value}">-->
+                    <!--<span th:utext="${word}"></span>...-->
+                <!--</span>-->
+            <!--</span>-->
+        <!--</div>-->
+    </li>
+</ul>
+
+<nav aria-label="..." class="">
+    <!--<ul class="pagination pagination-sm justify-content-center py-5">-->
+        <!--<li class="page-item ">-->
+            <!--<a class="page-link" href="#">-->
+                <!--<span aria-hidden="true">&laquo;</span>-->
+                <!--<span class="sr-only">Previous</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+        <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+        <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+        <!--<li class="page-item">-->
+            <!--<a class="page-link" href="#">-->
+                <!--<span aria-hidden="true">&raquo;</span>-->
+                <!--<span class="sr-only">Next</span>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+</nav>
+</body>
+<script>
+
+    </script>
+</html>
