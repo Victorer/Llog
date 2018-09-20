@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
- * @ProjectName: Llong
+ * @ProjectName: Llog
  * @Package: com.llog.demo.pojo
  * @ClassName: Customer
  * @Description: java类作用描述

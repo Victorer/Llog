@@ -1,18 +1,12 @@
 package com.llog.demo.controller;
 
+import com.llog.demo.kafkaproducer.KafkaProducer;
 import com.llog.demo.pojo.Customer;
 import com.llog.demo.service.CustomerRepository;
-import org.elasticsearch.common.lucene.search.function.FiltersFunctionScoreQuery;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
-import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.elasticsearch.index.query.QueryBuilders.functionScoreQuery;
-import static org.elasticsearch.index.query.QueryBuilders.matchPhraseQuery;
-import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+
 
 /**
  * @ProjectName: Llong
@@ -42,6 +34,8 @@ import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 public class TestController {
     @Autowired
     private CustomerRepository repository;
+    @Autowired
+    private KafkaProducer kafkaProducer;
 
     @RequestMapping("/save")
     @ResponseBody
@@ -92,6 +86,17 @@ public class TestController {
         });
         model.addAttribute("page",list);
         return "LogList";
+    }
+    @RequestMapping("/sendLog")
+    @ResponseBody
+    public String send(String type,String content){
+        try {
+            kafkaProducer.kafkaSend(type, content);
+        } catch (Exception ex) {
+
+            return "发送失败！";
+        }
+        return "发送成功！";
     }
 
 }
